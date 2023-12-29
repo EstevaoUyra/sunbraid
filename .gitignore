@@ -15,6 +15,7 @@ downloads/
 eggs/
 .python-version
 .eggs/
+myenv/
 lib/
 lib64/
 parts/
