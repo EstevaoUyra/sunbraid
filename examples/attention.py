@@ -9,12 +9,13 @@ def rep(d, **kwargs):
         d[0].rename(columns={v:k for k,v in kwargs.items()})
         .assign(color='#000000')
         .assign(linestyle= lambda d: d.x.apply(lambda v: 'solid' if v%2 else 'dotted'))
+        .assign(xlabel=lambda d: d.x)
         ).to_dict('records')
 
 df['data'] = df['data'].apply(rep, x='subject', value='score')
 df['plot'] = df['data'].apply(make_lineplot)
 
-html = make_head() + df.style.to_html()
+html = make_head() + df.style.set_table_attributes("class='table'").to_html()
 
 with open('examples/attention.html', 'w') as f:
     f.write(html)

@@ -2,7 +2,7 @@ import uuid
 def make_lineplot(data, height=50):
     random_id = str(uuid.uuid4()).replace('-', '')
     return f"""
-    <div class="chart-container">
+    <div class="magnifiable">
         <div id="rdivRUID{random_id}"></div>
     </div>
     <script>
