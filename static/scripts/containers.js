@@ -1,4 +1,4 @@
-// Bring magnifiable components over the hover
+// Bring magnifiable components over the hover.
 document.querySelectorAll('.magnifiable').forEach(container => {
     container.addEventListener('mouseover', () => {
         container.style.zIndex = 1000;  // Bring to front on hover
