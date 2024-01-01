@@ -20,6 +20,7 @@ jobs:
       # Add steps for any build or test processes you have here
 
       - name: Bump version and tag
+        id: generate_tag
         run: |
           # Fetch all tags
           git fetch --depth=1 origin +refs/tags/*:refs/tags/*
@@ -34,7 +35,7 @@ jobs:
           # Set the new tag
           git tag $NEXT_TAG
           git push origin $NEXT_TAG
-          echo "VERSION_TAG=$NEXT_TAG" >> $GITHUB_OUTPUT
+          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_OUTPUT
 
       # - name: Install setuptools_scm
       #   run: pip install setuptools_scm
@@ -53,7 +54,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.bump_version_and_tag.outputs.VERSION_TAG }}
-          release_name: Release ${{ steps.bump_version_and_tag.outputs.VERSION_TAG }}
+          tag_name: ${{ steps.generate_tag.outputs.VERSION_TAG }}
+          release_name: Release ${{ steps.generate_tag.outputs.VERSION_TAG }}
           draft: false
           prerelease: false
