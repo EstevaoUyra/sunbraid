@@ -35,7 +35,7 @@ jobs:
           # Set the new tag
           git tag $NEXT_TAG
           git push origin $NEXT_TAG
-          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_OUTPUT
+          echo "VERSION_TAG=$NEXT_TAG" >> $GITHUB_OUTPUT
 
       # - name: Install setuptools_scm
       #   run: pip install setuptools_scm
