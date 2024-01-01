@@ -17,29 +17,41 @@ else:
 
 
 
-css_imports = [f"""<link href="{path_maker(file)}" rel="stylesheet">""" for file in css_files]
-function_defs = [f"""<script src="{path_maker(file)}"></script>""" for file in functions_files]
-scripts = [f"""<script src="{path_maker(file)}"></script>""" for file in scripts_files]
-
-print(css_imports, function_defs, scripts)
+css_imports = '\n\t'.join([f"""<link href="{path_maker(file)}" rel="stylesheet">""" for file in css_files])
+function_defs = '\n\t'.join([f"""<script src="{path_maker(file)}"></script>""" for file in functions_files])
+scripts = '\n\t'.join([f"""<script src="{path_maker(file)}"></script>""" for file in scripts_files])
 
 
-# def get_imports():
-#     return f"""
-#             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-#             <script src="https://d3js.org/d3.v6.min.js"></script>
-#             <script src="{base_path}/static/functions/line.js"></script>
-#             <link href="{base_path}/static/css/containers.css" rel="stylesheet">
-#             """
+def render_page(html):
+    return f"""
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    {css_imports}
+    {function_defs}
+</head>
+<body>
+    {html}
+    {scripts}
+</body>
+"""
 
-# def make_head():
-#     all_imports = get_imports()
-#     return '<head>' + all_imports + '</head>'
+def get_imports():
+    return f"""
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+            <script src="https://d3js.org/d3.v6.min.js"></script>
+            <script src="{base_path}/static/functions/line.js"></script>
+            <link href="{base_path}/static/css/containers.css" rel="stylesheet">
+            """
 
-# def make_body(html):
-#     return (
-#         '<body>' + 
-#         html + 
-#         f'<script src="https://cdn.jsdelivr.net/gh/estevaouyra/sunbraid@{VERSION}/static/functions/containers.js"></script>'+
-#         '</body>'
-#     )
+def make_head():
+    all_imports = get_imports()
+    return '<head>' + all_imports + '</head>'
+
+def make_body(html):
+    return (
+        '<body>' + 
+        html + 
+        f'<script src="https://cdn.jsdelivr.net/gh/estevaouyra/sunbraid@{VERSION}/static/functions/containers.js"></script>'+
+        '</body>'
+    )
