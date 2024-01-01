@@ -1,5 +1,5 @@
-
-VERSION = 'v0.0.2-alpha'
+from sunbraid._version import __version__
+VERSION = __version__
 
 def get_imports():
     return f"""

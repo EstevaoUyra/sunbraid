@@ -1,5 +1,5 @@
 import pandas as pd
-from sunbraid.head import make_head
+from sunbraid.head import make_head, make_body
 from sunbraid.cell.line import make_lineplot
 df = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/attention.csv")
 df = df.groupby(['attention', 'solutions']).apply(lambda df: [df[['subject', 'score']]]).rename("data").reset_index()
@@ -15,6 +15,6 @@ def rep(d, **kwargs):
 df['data'] = df['data'].apply(rep, x='subject', value='score')
 df['plot'] = df['data'].apply(make_lineplot)
 
-html = make_head() + df.style.set_table_attributes("class='table'").to_html()
+html = make_head() + make_body(df.style.set_table_attributes("class='table'").to_html())
 with open('examples/attention.html', 'w') as f:
     f.write(html)
