@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4", "pandas"]
+
+[project]
+name = "sunbraid"
+version = "0.0.1-alpha"
+description = "A short description of the project."
+authors = [{name = "Your Name", email = "you@example.com"}]
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+homepage = "https://example.com/my_package"
+repository = "https://github.com/EstevaoUyra/sunbraid"
+documentation = "https://example.com/my_package/docs"
+
+[tool.setuptools_scm]
+# Configuration options for setuptools_scm
+write_to = "sunbraid/_version.py"
+# Optional: If you want to customize how the version is computed or formatted
+# version_scheme = "post-release"
+# local_scheme = "node-and-date"

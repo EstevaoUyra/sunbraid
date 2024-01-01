@@ -16,6 +16,5 @@ df['data'] = df['data'].apply(rep, x='subject', value='score')
 df['plot'] = df['data'].apply(make_lineplot)
 
 html = make_head() + df.style.set_table_attributes("class='table'").to_html()
-
 with open('examples/attention.html', 'w') as f:
     f.write(html)
