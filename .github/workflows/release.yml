@@ -1,4 +1,4 @@
-name: Create Release
+name: CI/CD Pipeline
 
 on:
   push:
@@ -6,21 +6,51 @@ on:
       - master
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    # Add steps for any build or test processes you have here
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
+      # Add steps for any build or test processes you have here
+
+      - name: Generate Tag
+        id: generate_tag
+        run: |
+          VERSION_TAG=$(date +v0.0.0alpha%y%m%d)  # Customize this line to generate your version tag
+          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
+          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_OUTPUT
+
+      - name: Push Tag
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your.email@example.com'
+          git tag ${{ env.VERSION_TAG }}
+          git push origin ${{ env.VERSION_TAG }}
+
+      - name: Install setuptools_scm
+        run: pip install setuptools_scm
+
+      - name: Build and Publish
+        run: |
+          # Replace with your build and publish commands
+          python setup.py sdist bdist_wheel
+          twine upload dist/*
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.generate_tag.outputs.VERSION_TAG }}
+          release_name: Release ${{ steps.generate_tag.outputs.VERSION_TAG }}
+          draft: false
+          prerelease: false
