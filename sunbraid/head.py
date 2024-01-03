@@ -1,8 +1,7 @@
-from sunbraid._version import __version__
+from sunbraid._version import __version__ as version
 import os
 from glob import glob
 
-version = __version__
 dir_path = '/'.join(os.path.abspath(__file__).split('/')[:-1])
 
 css_files = glob(f"{dir_path}/static/css/*", recursive=True)
@@ -15,12 +14,9 @@ if 'dev' in version:
 else:
     path_maker = lambda s: f"https://cdn.jsdelivr.net/gh/estevaouyra/sunbraid@{version}/sunbraid{s.replace(dir_path, '')}"
 
-
-
 css_imports = '\n\t'.join([f"""<link href="{path_maker(file)}" rel="stylesheet">""" for file in css_files])
 function_defs = '\n\t'.join([f"""<script src="{path_maker(file)}"></script>""" for file in functions_files])
 scripts = '\n\t'.join([f"""<script src="{path_maker(file)}"></script>""" for file in scripts_files])
-
 
 def render_page(html):
     return f"""
@@ -52,6 +48,6 @@ def make_body(html):
     return (
         '<body>' + 
         html + 
-        f'<script src="https://cdn.jsdelivr.net/gh/estevaouyra/sunbraid@{VERSION}/static/functions/containers.js"></script>'+
+        f'<script src="https://cdn.jsdelivr.net/gh/estevaouyra/sunbraid@{version}/static/functions/containers.js"></script>'+
         '</body>'
     )
