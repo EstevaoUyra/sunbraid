@@ -39,11 +39,11 @@ jobs:
           git push origin $NEXT_TAG
           echo "VERSION_TAG=$NEXT_TAG" >> $GITHUB_OUTPUT
 
-      - name: Install setuptools_scm
-        run: pip install setuptools_scm
-
       - name: Build and Publish
         run: |
+          pip install setuptools_scm
+          pip install wheel
+
           # Replace with your build and publish commands
           python setup.py sdist bdist_wheel
           twine upload dist/*
