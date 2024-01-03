@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - '/sunbraid/static/**/*'
 
 jobs:
   build-and-release:
