@@ -7,4 +7,3 @@ document.querySelectorAll('.magnifiable').forEach(container => {
         container.style.zIndex = 1;     // Reset on mouse out
     });
 });
-
