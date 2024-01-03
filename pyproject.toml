@@ -3,9 +3,9 @@ requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4", "pandas"]
 
 [project]
 name = "sunbraid"
-version = "0.0.1-alpha"
+dynamic = ["version"]
 description = "A short description of the project."
-authors = [{name = "Your Name", email = "you@example.com"}]
+authors = [{name = "Estevão Uyrá", email = "estevao.uyra.pv@gmail.com"}]
 license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.6"
