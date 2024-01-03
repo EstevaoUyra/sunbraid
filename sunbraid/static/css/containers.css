@@ -1,6 +1,6 @@
 .magnifiable {
     position: relative;
-    display: inline-block; /* Adjust as needed */
+    display: inline-block; /* Adjust as needed. */
     width: 100px;  /* Set to the initial scaled down width */
     height: 50px; /* Set to the initial scaled down height */
     overflow: visible; /* Allows the SVG to overlap surrounding elements when scaled */
