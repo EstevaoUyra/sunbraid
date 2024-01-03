@@ -1,5 +1,6 @@
 [build-system]
-requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4", "pandas"]
+requires = ["setuptools>=61", "wheel", "setuptools_scm[toml]>=3.4", "pandas"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "sunbraid"
@@ -19,14 +20,19 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[tool.setuptools_scm]
+# Configuration options for setuptools_scm
+write_to = "sunbraid/_version.py"
+version_scheme = "post-release"
+# Optional: If you want to customize how the version is computed or formatted
+# version_scheme = "post-release"
+# local_scheme = "node-and-date"
+
+[tool.setuptools.packages.find]
+include=["sunbraid"]
+
 [project.urls]
 homepage = "https://example.com/my_package"
 repository = "https://github.com/EstevaoUyra/sunbraid"
 documentation = "https://example.com/my_package/docs"
 
-[tool.setuptools_scm]
-# Configuration options for setuptools_scm
-write_to = "sunbraid/_version.py"
-# Optional: If you want to customize how the version is computed or formatted
-# version_scheme = "post-release"
-# local_scheme = "node-and-date"
