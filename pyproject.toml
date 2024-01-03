@@ -22,7 +22,7 @@ classifiers = [
 
 [tool.setuptools_scm]
 # Configuration options for setuptools_scm
-write_to = "sunbraid/_version.py"
+write_to = "_version.py"
 version_scheme = "post-release"
 # Optional: If you want to customize how the version is computed or formatted
 # version_scheme = "post-release"
