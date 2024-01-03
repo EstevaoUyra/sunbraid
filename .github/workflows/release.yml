@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - '/sunbraid/static/**/*'
+      - 'sunbraid/static/**/*'
 
 jobs:
   build-and-release:
