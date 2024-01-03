@@ -43,6 +43,7 @@ jobs:
         run: |
           pip install setuptools_scm
           pip install wheel
+          pip install twine
 
           # Replace with your build and publish commands
           python setup.py sdist bdist_wheel
