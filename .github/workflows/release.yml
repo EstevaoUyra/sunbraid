@@ -39,17 +39,17 @@ jobs:
           git push origin $NEXT_TAG
           echo "VERSION_TAG=$NEXT_TAG" >> $GITHUB_OUTPUT
 
-      # - name: Install setuptools_scm
-      #   run: pip install setuptools_scm
+      - name: Install setuptools_scm
+        run: pip install setuptools_scm
 
-      # - name: Build and Publish
-      #   run: |
-      #     # Replace with your build and publish commands
-      #     python setup.py sdist bdist_wheel
-      #     twine upload dist/*
-      #   env:
-      #     TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-      #     TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      - name: Build and Publish
+        run: |
+          # Replace with your build and publish commands
+          python setup.py sdist bdist_wheel
+          twine upload dist/*
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
 
       - name: Create Release
         uses: actions/create-release@v1
