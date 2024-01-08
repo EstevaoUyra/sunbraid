@@ -36,9 +36,9 @@ def make_lineplot(data, height=50):
     </script>
 """
 
-def lineplot(df, level, x, y, color=None, line_dash=None, backend='seaborn', name='lineplot'):
+def lineplot(df, level, x, y, color=None, line_dash=None, backend='seaborn', name='lineplot', **kwargs):
     if backend == 'seaborn':
-        plotter = make_plotter(sns.lineplot)
+        plotter = make_plotter(sns.lineplot, **kwargs)
         return (
             df.groupby(level).apply(lambda d: plotter(d, x=x, y=y, hue=color, style=line_dash)).rename(name).reset_index()
         )
