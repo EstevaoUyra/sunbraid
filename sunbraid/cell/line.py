@@ -1,6 +1,8 @@
 import uuid
 import seaborn as sns
 import numpy as np
+import seaborn as sns
+from .backend import make_plotter
 
 DASH_ORDER = []
 def get_colors(palette, N):
@@ -33,3 +35,10 @@ def make_lineplot(data, height=50):
         createLinePlot(dataRUID{random_id},  'rdivRUID{random_id}', {height});
     </script>
 """
+
+def lineplot(df, level, x, y, color=None, line_dash=None, backend='seaborn', name='lineplot'):
+    if backend == 'seaborn':
+        plotter = make_plotter(sns.lineplot)
+        return (
+            df.groupby(level).apply(lambda d: plotter(d, x=x, y=y, hue=color, style=line_dash)).rename(name).reset_index()
+        )

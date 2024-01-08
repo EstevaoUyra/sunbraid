@@ -1,4 +1,4 @@
-from sunbraid._version import __version__ as version
+from sunbraid import __version__ as version
 import os
 from glob import glob
 
@@ -9,7 +9,7 @@ functions_files = glob(f"{dir_path}/static/functions/*", recursive=True)
 scripts_files = glob(f"{dir_path}/static/scripts/*", recursive=True)
 
 
-if 'dev' in version:
+if len(version) > 12:
     path_maker = lambda s: s
 else:
     path_maker = lambda s: f"https://cdn.jsdelivr.net/gh/estevaouyra/sunbraid@{version}/sunbraid{s.replace(dir_path, '')}"

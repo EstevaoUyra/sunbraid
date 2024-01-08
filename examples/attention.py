@@ -12,9 +12,11 @@ def rep(d, **kwargs):
         .assign(xlabel=lambda d: 'sub' + d.x.astype(str))
         ).to_dict('records')
 
-df['data'] = df['data'].apply(rep, x='subject', value='score')
-df['data'] = df['data'].apply(make_lineplot)
 
+df['data'] = df['data'].apply(rep, x='subject', value='score')
+df['plot________________________plot'] = df['data'].apply(make_lineplot)
+df['large______________________name'] = 1
+df['other______________large______________________name'] = 1
 html = render_page(df.style.set_table_attributes("class='table'").to_html())
 with open('examples/attention.html', 'w') as f:
     f.write(html)
