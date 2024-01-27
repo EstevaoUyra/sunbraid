@@ -5,7 +5,7 @@ import pandas as pd
 import requests
 import matplotlib.pyplot as plt
 import sunbraid as sun
-from sunbraid.cell.line import lineplot
+from sunbraid.inline.line import lineplot
 from sunbraid.head import render_page
 from IPython.display import HTML
 %load_ext autoreload

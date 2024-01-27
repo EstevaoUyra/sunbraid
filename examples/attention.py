@@ -1,6 +1,6 @@
 import pandas as pd
 from sunbraid.head import render_page
-from sunbraid.cell.line import make_lineplot
+from sunbraid.inline.line import make_lineplot
 df = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/attention.csv")
 df = df.groupby(['attention', 'solutions']).apply(lambda df: [df[['subject', 'score']]]).rename("data").reset_index()
 
