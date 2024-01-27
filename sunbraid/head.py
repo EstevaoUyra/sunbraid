@@ -18,19 +18,46 @@ css_imports = '\n\t'.join([f"""<link href="{path_maker(file)}" rel="stylesheet">
 function_defs = '\n\t'.join([f"""<script src="{path_maker(file)}"></script>""" for file in functions_files])
 scripts = '\n\t'.join([f"""<script src="{path_maker(file)}"></script>""" for file in scripts_files])
 
-def render_page(html):
-    return f"""
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-    {css_imports}
-    {function_defs}
-</head>
-<body>
-    {html}
-    {scripts}
-</body>
-"""
+
+def render_page(html, mode='return', path=None):
+    """
+    Params
+    ------
+    html: str
+        HTML body to be rendered
+    mode: str
+        One of ['return', 'save', 'show']
+    path: str
+        Path to save the HTML file. Only used when mode='save'
+    
+    """
+    full_page = f"""
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        {css_imports}
+        {function_defs}
+    </head>
+    <body style="margin:100;padding:0">
+        {html}
+        {scripts}
+    </body>
+    """
+    assert mode in ['return', 'save', 'show'], "mode must be one of ['return', 'save', 'show']"
+    if mode=='return':
+        return full_page
+    elif mode=='save':
+        try: # if path is not None
+            with open(path, 'w') as f:
+                f.write(full_page)
+        except TypeError:
+            raise TypeError("When mode='save', path must be a string")
+    elif mode=='show':
+        print("displaying")
+        from IPython.display import display, HTML
+        display(HTML(full_page))
+        return None
+
 
 def get_imports():
     return f"""

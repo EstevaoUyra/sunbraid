@@ -4,6 +4,7 @@ from sunbraid.cell.line import make_lineplot
 df = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/attention.csv")
 df = df.groupby(['attention', 'solutions']).apply(lambda df: [df[['subject', 'score']]]).rename("data").reset_index()
 
+#%%
 def rep(d, **kwargs):
     return (
         d[0].rename(columns={v:k for k,v in kwargs.items()})
@@ -12,7 +13,7 @@ def rep(d, **kwargs):
         .assign(xlabel=lambda d: 'sub' + d.x.astype(str))
         ).to_dict('records')
 
-
+#%%
 df['data'] = df['data'].apply(rep, x='subject', value='score')
 df['plot________________________plot'] = df['data'].apply(make_lineplot)
 df['large______________________name'] = 1

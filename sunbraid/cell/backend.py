@@ -10,7 +10,7 @@ def b64encode(fig):
 
     if type(fig) == plt.Figure:
         buf = io.BytesIO()
-        fig.savefig(buf, format='png')
+        fig.savefig(buf, format='png', bbox_inches='tight', pad_inches=0)
         buf.seek(0)
         b64_string = base64.b64encode(buf.read()).decode('utf-8')
     return f"data:image/png;base64,{b64_string}"
@@ -34,10 +34,14 @@ def container(content, uid='', classes=''):
     </div>
     """
 
-def make_plotter(f, classes='incell'):
-    def g(*args, **kwargs):
+def make_sns_plotter(f, post_fig=None, classes='incell'):
+    def g(data, *args, **kwargs):
         fig, ax = plt.subplots()
-        pres = f(*args, **kwargs, ax=ax)
+        fig = f(data, *args, **kwargs, ax=ax)
+        if post_fig is not None:
+            plt.sca(ax)
+            post_fig(data=data, fig=fig, ax=ax)
+            fig = plt.gcf()
         plt.close(fig)
-        return container(embed_to_img(pres), classes=classes)
+        return container(embed_to_img(fig), classes=classes)
     return g
